@@ -26,12 +26,12 @@ export async function middleware(request: NextRequest) {
 			return NextResponse.redirect(url);
 		}
 
-		if (token?.user?.role !== 'admin') {
+		if (token?.user?.role !== 'ADMIN') {
 			return NextResponse.redirect(new URL('/', request.url));
 		}
 
 		if (pathname === '/admin') {
-			return NextResponse.redirect(new URL('/admin/donation', request.url));
+			return NextResponse.redirect(new URL('/admin/category', request.url));
 		}
 	}
 

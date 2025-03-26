@@ -1,9 +1,7 @@
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Spinner, Textarea } from "@heroui/react"
+import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, Spinner, Textarea } from "@heroui/react"
 import useAddCategoryModal from "./useAddCategoryModal";
 import { Controller } from "react-hook-form";
-import InputFile from "@/components/ui/InputFile";
 import { useEffect } from "react";
-
 interface PropTypes {
   isOpen: boolean;
   onOpenChange: () => void;
@@ -18,16 +16,11 @@ const AddCategoryModal = (props: PropTypes) => {
   const {
     control,
     errors,
-    preview,
     handleSubmitForm,
     handleAddCategory,
     isPendingMutateAddCategory,
     isSuccessMutateAddCategory,
-    isPendingMutateUploadFile,
-    handleUploadIcon,
-    handleDeleteIcon,
     handleOnClose,
-    isPendingMutateDeleteFile,
   } = useAddCategoryModal();
 
   useEffect(() => {
@@ -38,8 +31,7 @@ const AddCategoryModal = (props: PropTypes) => {
 
   }, [isSuccessMutateAddCategory])
 
-  const disbaledSubmit = isPendingMutateAddCategory || isPendingMutateUploadFile || isPendingMutateDeleteFile;
-
+  const disbaledSubmit = isPendingMutateAddCategory;
 
   return (
     <Modal
@@ -69,35 +61,25 @@ const AddCategoryModal = (props: PropTypes) => {
                 )}
               />
               <Controller
+                name="isActive"
                 control={control}
-                name="description"
                 render={({ field }) => (
-                  <Textarea
+                  <Select
                     {...field}
-                    label="Deskripsi Kategori"
+                    value={String(field.value)}
+                    label="Status Kategori"
                     variant="bordered"
-                    isInvalid={errors.description !== undefined}
-                    errorMessage={errors.description?.message}
-                    className="mb-2"
-                  />
-                )}
-              />
-              <p className="text-sm font-bold">Ikon</p>
-              <Controller
-                name="icon"
-                control={control}
-                render={({ field: { onChange, value, ...field } }) => (
-                  <InputFile
-                    {...field}
-                    onUpload={(files) => handleUploadIcon(files, onChange)}
-                    onDelete={() => handleDeleteIcon(onChange)}
-                    isUploading={isPendingMutateUploadFile}
-                    isDeleting={isPendingMutateDeleteFile}
-                    isInvalid={errors.icon !== undefined}
-                    isDropable
-                    errorMessage={errors.icon?.message}
-                    preview={typeof preview === 'string' ? preview : ""}
-                  />
+                    isInvalid={errors.isActive !== undefined}
+                    errorMessage={errors.isActive?.message}
+                    disallowEmptySelection
+                  >
+                    <SelectItem key="true" id="true">
+                      Aktif
+                    </SelectItem>
+                    <SelectItem key="false" id="false">
+                      Tidak Aktif
+                    </SelectItem>
+                  </Select>
                 )}
               />
             </div>
@@ -118,7 +100,10 @@ const AddCategoryModal = (props: PropTypes) => {
                 isPendingMutateAddCategory ? (
                   <Spinner size="sm" color="white" />
                 ) : (
-                  <p className="text-white">Tambah kategori</p>
+                  <>
+
+                    <p className="text-white">Simpan</p>
+                  </>
                 )
               }</Button>
           </ModalFooter>

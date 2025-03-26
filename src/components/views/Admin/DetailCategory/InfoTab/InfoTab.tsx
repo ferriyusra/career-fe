@@ -5,6 +5,8 @@ import {
   CardBody,
   CardHeader,
   Input,
+  Select,
+  SelectItem,
   Skeleton,
   Spinner,
   Textarea,
@@ -32,7 +34,7 @@ const InfoTab = (props: PropTypes) => {
 
   useEffect(() => {
     setValueUpdateInfo("name", `${dataCategory?.name}`);
-    setValueUpdateInfo("description", `${dataCategory?.description}`);
+    setValueUpdateInfo("isActive", Boolean(dataCategory?.isActive));
   }, [dataCategory]);
 
   useEffect(() => {
@@ -44,8 +46,8 @@ const InfoTab = (props: PropTypes) => {
   return (
     <Card className="w-full p-4 lg:w-1/2">
       <CardHeader className="flex-col items-center">
-        <h1 className="w-full text-xl font-bold">Informasi Kategori</h1>
-        <p className="w-full text-small text-default-400">Atur ikon kategori</p>
+        <h1 className="w-full text-xl font-bold">Info Kategori</h1>
+        <p className="w-full text-small text-default-400">Atur Kategori</p>
       </CardHeader>
       <CardBody>
         <form
@@ -71,22 +73,30 @@ const InfoTab = (props: PropTypes) => {
               )}
             />
           </Skeleton>
-          <Skeleton
-            isLoaded={!!dataCategory?.description}
-            className="rounded-lg"
-          >
+          <Skeleton isLoaded={!!dataCategory} className="rounded-lg">
             <Controller
+              name="isActive"
               control={controlUpdateInfo}
-              name="description"
               render={({ field }) => (
-                <Textarea
+                <Select
                   {...field}
-                  label="Deskripsi Kategori"
+                  value={String(field.value)}
+                  label="Status Kategori"
                   variant="bordered"
-                  isInvalid={errorsUpdateInfo.description !== undefined}
-                  errorMessage={errorsUpdateInfo.description?.message}
-                  labelPlacement="outside"
-                ></Textarea>
+                  isInvalid={errorsUpdateInfo.isActive !== undefined}
+                  errorMessage={errorsUpdateInfo.isActive?.message}
+                  disallowEmptySelection
+                  defaultSelectedKeys={[
+                    dataCategory?.isActive === true ? "true" : "false",
+                  ]}
+                >
+                  <SelectItem key="true" id="true">
+                    Aktif
+                  </SelectItem>
+                  <SelectItem key="false" id="false">
+                    Tidak Aktif
+                  </SelectItem>
+                </Select>
               )}
             />
           </Skeleton>
@@ -94,13 +104,13 @@ const InfoTab = (props: PropTypes) => {
             type="submit"
             color="success"
             className="mt-2 disabled:bg-default-500 bg-teal-600"
-            disabled={isPendingUpdate || !dataCategory?._id}
+            disabled={isPendingUpdate || !dataCategory?.id}
           >
             {" "}
             {isPendingUpdate ? (
               <Spinner size="sm" color="white" />
             ) : (
-              <span className="text-white">Simpan Perubahan</span>
+              <span className="text-white">Simpan</span>
             )}
           </Button>
         </form>

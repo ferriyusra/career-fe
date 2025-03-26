@@ -1,4 +1,4 @@
-import { DELAY, LIMIT_DEFAULT, PAGE_DEFAULT } from "@/constants/list.constants";
+import { DELAY, PER_PAGE_DEFAULT, PAGE_DEFAULT } from "@/constants/list.constants";
 import { useRouter } from "next/router";
 import useDebounce from "./useDebounce";
 import { ChangeEvent } from "react";
@@ -7,27 +7,15 @@ const useChangeUrl = () => {
 
   const router = useRouter();
   const debounce = useDebounce();
-  const currentLimit = router.query.limit;
+  const currentPerPage = router.query.perPage;
   const currentPage = router.query.page;
   const currentSearch = router.query.search;
-  const currentCategory = router.query.category;
 
   const setUrl = () => {
     router.replace({
       query: {
-        limit: currentLimit || LIMIT_DEFAULT,
         page: currentPage || PAGE_DEFAULT,
-        search: currentSearch || "",
-      },
-    });
-  }
-
-  const setUrlExplore = () => {
-    router.replace({
-      query: {
-        limit: currentLimit || LIMIT_DEFAULT,
-        page: currentPage || PAGE_DEFAULT,
-        category: currentCategory || "",
+        perPage: currentPerPage || PER_PAGE_DEFAULT,
       },
     });
   }
@@ -46,21 +34,11 @@ const useChangeUrl = () => {
     router.push({
       query: {
         ...router.query,
-        limit: selectedLimit,
         page: PAGE_DEFAULT,
+        perPage: selectedLimit,
       },
     });
   };
-
-  const handleChangeCategory = (category: string) => {
-    router.push({
-      query: {
-        ...router.query,
-        category,
-        page: PAGE_DEFAULT,
-      }
-    })
-  }
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     debounce(() => {
@@ -87,7 +65,7 @@ const useChangeUrl = () => {
 
 
   return {
-    currentLimit,
+    currentPerPage,
     currentPage,
     currentSearch,
     setUrl,
@@ -95,10 +73,6 @@ const useChangeUrl = () => {
     handleChangeLimit,
     handleSearch,
     handleClearSearch,
-
-    setUrlExplore,
-    currentCategory,
-    handleChangeCategory,
   };
 
 }

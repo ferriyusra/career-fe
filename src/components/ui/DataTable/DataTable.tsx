@@ -1,5 +1,6 @@
 import { LIMIT_LISTS } from "@/constants/list.constants";
 import useChangeUrl from "@/hooks/useChangeUrl";
+import Image from "next/image";
 import { cn } from "@/utils/cn";
 import {
   Button,
@@ -34,7 +35,7 @@ interface PropTypes {
 const DataTable = (props: PropTypes) => {
 
   const {
-    currentLimit,
+    currentPerPage,
     currentPage,
     handleChangePage,
     handleChangeLimit,
@@ -72,6 +73,13 @@ const DataTable = (props: PropTypes) => {
           <Button color="success" onPress={onClickButtonTopContent}
             className="bg-teal-600"
           >
+            <Image
+              src="/images/general/add-square-white.svg"
+              alt="icon-add"
+              className="size-6 shrink-0"
+              width={180}
+              height={60}
+            />
             <p className="text-white"> {buttonTopContentLabel}</p>
           </Button>
         )}
@@ -92,7 +100,7 @@ const DataTable = (props: PropTypes) => {
             disallowEmptySelection
             className="hidden max-w-36 lg:block"
             size="md"
-            selectedKeys={[`${currentLimit}`]}
+            selectedKeys={[`${currentPerPage}`]}
             selectionMode="single"
             onChange={handleChangeLimit}
             startContent={<p className="text-small">Tampilkan:</p>}
@@ -117,7 +125,7 @@ const DataTable = (props: PropTypes) => {
         )}
       </div>
     );
-  }, [currentLimit, currentPage, totalPages, handleChangeLimit, handleChangePage]);
+  }, [currentPerPage, currentPage, totalPages, handleChangeLimit, handleChangePage]);
 
   return (
     <Table
@@ -149,7 +157,7 @@ const DataTable = (props: PropTypes) => {
         }
       >
         {(item) => (
-          <TableRow key={item._id as Key}>
+          <TableRow key={item.id as Key}>
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey)}</TableCell>
             )}

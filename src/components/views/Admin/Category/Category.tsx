@@ -1,8 +1,8 @@
 import DataTable from "@/components/ui/DataTable";
 import {
+  Chip,
   useDisclosure,
 } from "@heroui/react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { Key, ReactNode, useCallback, useEffect } from "react";
 import { COLUMN_LISTS_CATEGORY } from "./Category.constants";
@@ -38,16 +38,22 @@ const Category = () => {
       const cellValue = category[columnKey as keyof typeof category];
 
       switch (columnKey) {
-        case "icon":
+        case "isActive":
           return (
-            <Image src={`${cellValue}`} alt="icon" width={100} height={200} />
-          );
+            <Chip
+              color={cellValue ? "success" : "warning"}
+              size="sm"
+              variant="flat"
+            >
+              {cellValue === true ? "Publish" : "Not Publish"}
+            </Chip>
+          )
         case "actions":
           return (
             <DropdownAction
-              onPressButtonDetail={() => push(`/admin/category/${category._id}`)}
+              onPressButtonDetail={() => push(`/admin/category/${category.id}`)}
               onPressButtonDelete={() => {
-                setSelectedId(`${category._id}`);
+                setSelectedId(`${category.id}`);
                 deleteCategoryModal.onOpen();
               }}
             />
@@ -65,11 +71,11 @@ const Category = () => {
         <DataTable
           isLoading={isLoadingCategory || isRefetchingCategory}
           columns={COLUMN_LISTS_CATEGORY}
-          emptyContent="Kategori kosong"
+          emptyContent="Kategori Kosong"
           onClickButtonTopContent={addCategoryModal.onOpen}
           buttonTopContentLabel="Tambah Kategori"
           renderCell={renderCell}
-          totalPages={dataCategory?.pagination.totalPages}
+          totalPages={Math.ceil(dataCategory?.pagination.total / dataCategory?.pagination.perPage)}
           data={dataCategory?.data || []}
         />
       )}

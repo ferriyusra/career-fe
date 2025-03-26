@@ -64,33 +64,24 @@ const Register = () => {
 
               <div className="flex flex-col gap-1">
                 <label className="text-sm flex items-center gap-1">
-                  Username: <span className="text-danger">*</span>
+                  Nama Lengkap: <span className="text-danger">*</span>
                 </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-default-400">
-                    wer.nyawer/
-                  </div>
-                  <Controller
-                    name="username"
-                    control={control}
-                    rules={{ required: "Username wajib diisi" }}
-                    render={({ field }) => (
-                      <Input
-                        {...field}
-                        type="text"
-                        className="pl-28"
-                        placeholder="budi"
-                        autoComplete="off"
-                        variant="bordered"
-                        isInvalid={errors.username !== undefined}
-                        errorMessage={errors.username?.message}
-                      />
-                    )}
-                  />
-                </div>
-                <p className="text-xs text-default-400 mt-1">
-                  Username akan menjadi link nyawer kamu
-                </p>
+                <Controller
+                  name="fullName"
+                  control={control}
+                  rules={{ required: "Nama Lengkap wajib diisi" }}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="budi"
+                      autoComplete="off"
+                      variant="bordered"
+                      isInvalid={errors.fullName !== undefined}
+                      errorMessage={errors.fullName?.message}
+                    />
+                  )}
+                />
               </div>
 
               <div className="flex flex-col gap-1">

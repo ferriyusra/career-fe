@@ -6,7 +6,7 @@ const AdminCategoryPage = () => {
     <DashboardLayout
       title="Kategori"
       description="Daftar Semua Kategori, tambah Kategori dan atur Kategori yang tersedia."
-      type="admin">
+      type="ADMIN">
       <Category />
     </DashboardLayout>
   )

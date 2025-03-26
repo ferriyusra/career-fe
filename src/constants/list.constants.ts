@@ -1,24 +1,22 @@
 const LIMIT_LISTS = [
 	{
-		label: '8',
-		value: 8,
+		label: '10',
+		value: 10,
 	},
 	{
-		label: '12',
-		value: 12,
+		label: '15',
+		value: 15,
 	},
 	{
-		label: '16',
-		value: 16,
+		label: '50',
+		value: 50,
 	},
 ];
 
-const LIMIT_DEFAULT = LIMIT_LISTS[0].value;
+const PER_PAGE_DEFAULT = LIMIT_LISTS[0].value;
 
 const PAGE_DEFAULT = 1;
 
 const DELAY = 1000;
 
-const LIMIT_CATEGORY = 8;
-
-export { LIMIT_LISTS, LIMIT_DEFAULT, LIMIT_CATEGORY, PAGE_DEFAULT, DELAY };
+export { LIMIT_LISTS, PER_PAGE_DEFAULT, PAGE_DEFAULT, DELAY };

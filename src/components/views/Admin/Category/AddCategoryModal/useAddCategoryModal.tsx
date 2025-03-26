@@ -10,57 +10,24 @@ import * as yup from "yup";
 
 const schema = yup.object().shape({
   name: yup.string().required("Mohon masukkan nama kategori"),
-  description: yup.string().required("Mohon masukkan deskripsi kategori"),
-  icon: yup.mixed<FileList | string>().required("Mohon masukkan ikon kategori"),
+  isActive: yup.boolean().required("Mohon tentukan kategori aktif"),
 });
 
 const useAddCategoryModal = () => {
   const { setToaster } = useContext(ToasterContext);
   const {
-    isPendingMutateUploadFile,
-    isPendingMutateDeleteFile,
-
-    handleDeleteFile,
-    handleUploadFile,
-  } = useMediaHandling();
-
-  const {
     control,
     handleSubmit: handleSubmitForm,
     formState: { errors },
     reset,
-    watch,
-    getValues,
-    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const preview = watch("icon");
-  const fileUrl = getValues("icon");
-
-  const handleUploadIcon = (
-    files: FileList,
-    onChange: (files: FileList | undefined) => void,
-  ) => {
-    handleUploadFile(files, onChange, (fileUrl: string | undefined) => {
-      if (fileUrl) {
-        setValue("icon", fileUrl);
-      }
-    });
-  };
-
-  const handleDeleteIcon = (
-    onChange: (files: FileList | undefined) => void,
-  ) => {
-    handleDeleteFile(fileUrl, () => onChange(undefined));
-  };
 
   const handleOnClose = (onClose: () => void) => {
-    handleDeleteFile(fileUrl, () => {
-      reset();
-      onClose();
-    });
+    reset();
+    onClose();
   };
 
   const addCategory = async (payload: ICategory) => {
@@ -102,11 +69,6 @@ const useAddCategoryModal = () => {
     isPendingMutateAddCategory,
     isSuccessMutateAddCategory,
 
-    preview,
-    handleUploadIcon,
-    isPendingMutateUploadFile,
-    handleDeleteIcon,
-    isPendingMutateDeleteFile,
     handleOnClose,
   };
 };

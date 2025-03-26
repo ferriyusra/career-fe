@@ -1,16 +1,10 @@
 import { FaHandHoldingHeart, FaWallet, FaTag, FaUser } from "react-icons/fa6"
 
-const SIDEBAR_FUNDRAISER = [
-  {
-    key: "transation",
-    label: "Transaction",
-    href: "/fundraiser/donation",
-    icon: <FaWallet />
-  },
+const SIDEBAR_USER = [
   {
     key: "profile",
     label: "Profile",
-    href: "/fundraiser/profile",
+    href: "/user/profile",
     icon: <FaUser />
   },
 ]
@@ -18,19 +12,13 @@ const SIDEBAR_FUNDRAISER = [
 const SIDEBAR_ADMIN = [
   {
     key: "category",
-    label: "Kategori",
+    label: "Category",
     href: "/admin/category",
     icon: <FaTag />
-  },
-  {
-    key: "campaign",
-    label: "Penggalangan Dana",
-    href: "/admin/campaign",
-    icon: <FaHandHoldingHeart />
   },
 ]
 
 export {
   SIDEBAR_ADMIN,
-  SIDEBAR_FUNDRAISER
+  SIDEBAR_USER
 }

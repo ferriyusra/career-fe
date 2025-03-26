@@ -1,10 +1,7 @@
 interface ICategory {
-  _id?:string;
-  name?: string;
-  description?: string;
-  icon?: string | FileList;
+	id?: string;
+	name?: string;
+	isActive?: boolean | string;
 }
 
-export type {
-  ICategory,
-}
+export type { ICategory };

@@ -2,7 +2,7 @@ import { Session, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
 interface IRegister {
-	username: string;
+	fullName: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
@@ -31,13 +31,15 @@ interface JWTExtended extends JWT {
 }
 
 interface IProfile {
-	_id?: string;
+	userId?: string;
 	email?: string;
 	fullName?: string;
-	isActive?: boolean;
+	birthDate?: string;
+	phone?: string;
+	gender?: string;
+	avatar?: string;
 	profilePicture?: string | FileList;
 	role?: string;
-	username?: string;
 }
 
 interface IUpdatePassword {

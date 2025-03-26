@@ -10,7 +10,7 @@ import { ToasterContext } from '@/contexts/ToasterContext';
 
 const registerSchema = yup.object().shape({
 	agreeToTerms: yup.boolean().required('Mohon setujui syarat dan pengguna'),
-	username: yup.string().required('Mohon masukkan nama pengguna'),
+	fullName: yup.string().required('Mohon masukkan nama pengguna'),
 	email: yup
 		.string()
 		.email('Email tidak valid')

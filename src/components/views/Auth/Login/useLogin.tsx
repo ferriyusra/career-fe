@@ -39,6 +39,9 @@ const useLogin = () => {
       callbackUrl
     });
 
+    console.log("SignIn Result:", result); // Debugging
+    console.error("Login Error:", result?.error); // Lih
+
     if (result?.error && result?.status === 401) {
       throw new Error("Gagal Login!")
     }

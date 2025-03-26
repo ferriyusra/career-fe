@@ -4,7 +4,7 @@ import * as yup from "yup";
 
 const schemaUpdateInfo = yup.object().shape({
   name: yup.string().required("Mohon masukkan nama kategori"),
-  description: yup.string().required("Mohon masukkan deskripsi kategori"),
+  isActive: yup.boolean().required("Mohon tentukan kategori aktif"),
 });
 
 const useInfoTab = () => {
