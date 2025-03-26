@@ -1,10 +1,10 @@
 import LandingPageLayout from "@/components/layouts/LandingPageLayout";
-import Home from "@/components/views/Home";
+// import Home from "@/components/views/Home";
 
 const HomePage = () => {
   return (
-    <LandingPageLayout title="Berbagi - Donasi">
-      <Home />
+    <LandingPageLayout title="Landing | Karir">
+      <h1>home</h1>
     </LandingPageLayout>
   );
 }

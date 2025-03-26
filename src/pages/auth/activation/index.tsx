@@ -8,7 +8,7 @@ interface PropTypes {
 
 const ActivationPage = (props: PropTypes) => {
   return (
-    <AuthLayout title="Berbagi Donasi | Activation">
+    <AuthLayout title="Aktivasi | Karir">
       <Activation {...props} />
     </AuthLayout>
   )

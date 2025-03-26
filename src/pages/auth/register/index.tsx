@@ -3,7 +3,7 @@ import Register from "@/components/views/Auth/Register";
 
 const RegisterPage = () => {
   return (
-    <AuthLayout title="Berbagi Donasi | Daftar">
+    <AuthLayout title="Daftar | Karir ">
       <Register />
     </AuthLayout>
   )

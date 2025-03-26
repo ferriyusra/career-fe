@@ -35,7 +35,7 @@ export async function middleware(request: NextRequest) {
 		}
 	}
 
-	if (pathname.startsWith('/fundraiser')) {
+	if (pathname.startsWith('/user')) {
 		if (!token) {
 			const url = new URL('/auth/login', request.url);
 			url.searchParams.set('callbackUrl', encodeURI(request.url));
@@ -43,12 +43,12 @@ export async function middleware(request: NextRequest) {
 			return NextResponse.redirect(url);
 		}
 
-		if (pathname === '/fundraiser') {
-			return NextResponse.redirect(new URL('/fundraiser/profile', request.url));
+		if (pathname === '/user') {
+			return NextResponse.redirect(new URL('/user/profile', request.url));
 		}
 	}
 }
 
 export const config = {
-	matcher: ['/auth/:path*', '/admin/:path*', '/fundraiser/:path*'],
+	matcher: ['/auth/:path*', '/admin/:path*', '/user/:path*'],
 };

@@ -3,7 +3,7 @@ import RegisterSuccess from "@/components/views/Auth/RegisterSuccess";
 
 const RegisterSuccessPage = () => {
   return (
-    <AuthLayout title="Berbagi Donasi | Register Success">
+    <AuthLayout title="Aktivasi Berhasil | Karir">
       <RegisterSuccess />
     </AuthLayout>
   )

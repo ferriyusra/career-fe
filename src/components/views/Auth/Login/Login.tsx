@@ -2,9 +2,8 @@ import { Button, Card, CardBody, Input, Spinner } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import useLogin from "./useLogin";
-import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { Controller } from "react-hook-form";
-import { cn } from "@/utils/cn";
+import { FaEye, FaEyeSlash, FaHeart, FaInstagram, FaXTwitter, FaDiscord } from "react-icons/fa6";
 
 const Login = () => {
   const {
@@ -18,94 +17,130 @@ const Login = () => {
   } = useLogin();
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-10 lg:flex-row lg:gap-20">
-      <div className="lg:py flex w-full flex-col items-center justify-center gap-10 py-10 lg:w-1/3">
-        <Image
-          src="/images/general/logo.svg"
-          alt="logo"
-          width={180}
-          height={180}
-        />
-        <Image
-          src="/images/illustrations/login.svg"
-          alt="login"
-          className="w-2/3 lg:w-full"
-          width={1024}
-          height={1024}
-        />
-      </div>
-      <Card>
-        <CardBody className="p-8">
-          <h2 className="text-2xl font-bold text-teal-600">Login</h2>
-          <p className="mb-4 mt-2 text-small">
-            Belum punya akun?&nbsp;
-            <Link href="/auth/register" className="font-semibold text-teal-600">
-              Daftar disini
-            </Link>
-          </p>
-          {
-            errors.root && (
-              <p className="mb-2 font-medium text-teal">
+    <div className="flex min-h-screen flex-col">
+      <div className="flex-1 flex w-full flex-col items-center justify-center">
+        <Card className="w-full max-w-md shadow-xl border-none">
+          <CardBody className="p-8">
+            <div className="flex flex-col items-center mb-6">
+              <Image
+                src="/images/general/logo.svg"
+                alt="logo"
+                width={180}
+                height={60}
+                className="mb-4"
+              />
+              <h2 className="text-2xl font-bold text-center">Registrasi</h2>
+            </div>
+
+            {errors.root && (
+              <p className="mb-2 font-medium text-danger">
                 {errors?.root?.message}
               </p>
-            )
-          }
-          <form className={cn("flex w-80 flex-col", Object.keys(errors).length > 0 ? "gap-2" : "gap-4")} onSubmit={handleSubmit(handleLogin)}>
-            <Controller
-              name="identifier"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type="text"
-                  label="Nama Pengguna / Email"
-                  autoComplete="off"
-                  variant="bordered"
-                  isInvalid={errors.identifier !== undefined}
-                  errorMessage={errors.identifier?.message}
+            )}
+
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit(handleLogin)}>
+              <div className="flex flex-col gap-1">
+                <label className="text-sm flex items-center gap-1">
+                  Email: <span className="text-danger">*</span>
+                </label>
+                <Controller
+                  name="identifier"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="text"
+                      label="Nama Pengguna / Email"
+                      autoComplete="off"
+                      variant="bordered"
+                      isInvalid={errors.identifier !== undefined}
+                      errorMessage={errors.identifier?.message}
+                    />
+                  )}
                 />
-              )}
-            />
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  type={isVisible ? "text" : "password"}
-                  label="Kata Sandi"
-                  autoComplete="off"
-                  variant="bordered"
-                  isInvalid={errors.password !== undefined}
-                  errorMessage={errors.password?.message}
-                  endContent={
-                    <>
-                      <button
-                        className="focus:outline-none"
-                        type="button"
-                        onClick={toggleVisibility}
-                      >
-                        {isVisible ? (
-                          <FaEye className="pointer-events-none text-xl text-default-400" />
-                        ) : (
-                          <FaEyeSlash className="pointer-events-none text-xl text-default-400" />
-                        )}
-                      </button>
-                    </>
-                  }
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label className="text-sm flex items-center gap-1">
+                  Password: <span className="text-danger">*</span>
+                </label>
+                <Controller
+                  name="password"
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type={isVisible ? "text" : "password"}
+                      label="Kata Sandi"
+                      autoComplete="off"
+                      variant="bordered"
+                      isInvalid={errors.password !== undefined}
+                      errorMessage={errors.password?.message}
+                      endContent={
+                        <>
+                          <button
+                            className="focus:outline-none"
+                            type="button"
+                            onClick={toggleVisibility}
+                          >
+                            {isVisible ? (
+                              <FaEye className="pointer-events-none text-xl text-default-400" />
+                            ) : (
+                              <FaEyeSlash className="pointer-events-none text-xl text-default-400" />
+                            )}
+                          </button>
+                        </>
+                      }
+                    />
+                  )}
                 />
-              )}
-            />
-            <Button color="success" size="lg" type="submit" className="bg-teal-600">
-              {
-                isPendingLogin ? (
-                  <Spinner color="white" size="sm" />
-                ) : <p className="text-white">Masuk</p>
-              }
-            </Button>
-          </form>
-        </CardBody>
-      </Card>
+              </div>
+
+              <Button color="success" size="lg" type="submit" className="bg-teal-600">
+                {
+                  isPendingLogin ? (
+                    <Spinner color="white" size="sm" />
+                  ) : <p className="text-white">Masuk</p>
+                }
+              </Button>
+
+              <p className="text-center text-sm mt-2">
+                Apakah belum punya akun?{" "}
+                <Link href="/auth/register" className="font-semibold text-teal-600">
+                  Daftar disini
+                </Link>
+              </p>
+            </form>
+          </CardBody>
+        </Card>
+
+        <div className="mt-6 text-center text-sm text-default-500">
+          <div className="flex justify-center items-center gap-1 mb-2">
+            <span>Made with</span>
+            <FaHeart className="text-blue-500" />
+          </div>
+          <p>Life at karir</p>
+          <div className="flex justify-center gap-4 mt-4">
+            <Link href="#" aria-label="Syarat dan ketentuan">Syarat dan ketentuan</Link>
+            <Link href="#" aria-label="FAQ">FAQ</Link>
+            <Link href="#" aria-label="Changelog">Changelog</Link>
+          </div>
+          <div className="flex justify-center gap-4 mt-4">
+            <Link href="#" aria-label="Email">
+              <FaHeart className="text-xl" />
+            </Link>
+            <Link href="#" aria-label="Instagram">
+              <FaInstagram className="text-xl" />
+            </Link>
+            <Link href="#" aria-label="Twitter">
+              <FaXTwitter className="text-xl" />
+            </Link>
+            <Link href="#" aria-label="Discord">
+              <FaDiscord className="text-xl" />
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
