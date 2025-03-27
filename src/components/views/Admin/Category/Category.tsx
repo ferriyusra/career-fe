@@ -45,7 +45,7 @@ const Category = () => {
               size="sm"
               variant="flat"
             >
-              {cellValue === true ? "Publish" : "Not Publish"}
+              {cellValue === true ? "Aktif" : "Tidak Aktif"}
             </Chip>
           )
         case "actions":

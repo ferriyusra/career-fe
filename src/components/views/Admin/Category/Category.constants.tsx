@@ -1,10 +1,10 @@
 const COLUMN_LISTS_CATEGORY = [
   {
-    name: "Name",
+    name: "Kategori",
     uid: "name",
   },
   {
-    name: "Active",
+    name: "Status Aktif",
     uid: "isActive",
   },
   {
