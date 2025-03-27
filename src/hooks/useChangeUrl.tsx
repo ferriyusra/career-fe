@@ -16,6 +16,7 @@ const useChangeUrl = () => {
       query: {
         page: currentPage || PAGE_DEFAULT,
         perPage: currentPerPage || PER_PAGE_DEFAULT,
+        search: currentSearch || "",
       },
     });
   }
